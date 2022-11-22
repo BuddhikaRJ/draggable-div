@@ -2,7 +2,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const merge = require("webpack-merge").merge;
 const {ProgressPlugin} = require("webpack");
-const CopyPlugin = require("copy-webpack-plugin");
 
 const COMMON_CONFIG = {
   entry: "./src/index.js",
@@ -18,11 +17,7 @@ const COMMON_CONFIG = {
       }
     ),
     new ProgressPlugin(),
-    new CopyPlugin({
-      patterns: [
-        { from: "./images/", to: path.resolve(__dirname, "dist/images") },
-      ],
-    }),
+
   ],
   optimization: {
     splitChunks: {

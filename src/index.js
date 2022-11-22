@@ -17,6 +17,8 @@ function init(){
     draggable.addEventListener('mousedown', onClick);
     document.addEventListener('mousemove', onDrag);
     document.addEventListener('mouseup', onDrop);
+
+    window.addEventListener("resize", onResize)
 }
 
 function onClick(event) {
@@ -51,4 +53,15 @@ function clampPostion(value, min, max){
     if(value > max) return max;
     else if(value < min)return min;
     else return value;
+}
+
+function onResize() {
+  parentRect = parent.getBoundingClientRect();
+  draggableRect = draggable.getBoundingClientRect();
+
+  const x = clampPostion(draggableRect.left , parentRect.left, parentRect.right - draggableRect.width);
+  const y = clampPostion(draggableRect.top , parentRect.top, parentRect.bottom - draggableRect.height);
+
+  draggable.style.left = x + "px";
+  draggable.style.top = y + "px";
 }
